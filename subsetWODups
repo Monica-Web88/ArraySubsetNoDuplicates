@@ -1,0 +1,35 @@
+// JavaScript program to print all subsets
+// of a given Set or Array
+
+function subsetRecur(i, arr, res, subset) {
+    
+    // add subset at end of array
+    if (i === arr.length) {
+        res.push([...subset]);
+        return;
+    }
+    
+    // include the current value and 
+    // recursively find all subsets
+    subset.push(arr[i]);
+    subsetRecur(i + 1, arr, res, subset);
+    
+    // exclude the current value and 
+    // recursively find all subsets
+    subset.pop();
+    subsetRecur(i + 1, arr, res, subset);
+}
+
+function subsets(arr) {
+    const subset = [];
+    const res = [];
+    subsetRecur(0, arr, res, subset);
+    return res;
+}
+
+const arr = [1, 2, 3];
+const res = subsets(arr);
+
+for (const subset of res) {
+    console.log(subset.join(" "));
+}
